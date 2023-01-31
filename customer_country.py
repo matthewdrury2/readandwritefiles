@@ -1,19 +1,22 @@
 import csv
 
 customers = open("customers.csv", "r")
+reader = csv.reader(customers)
+next(reader)
 
-customer_file = csv.reader(customers, delimiter=",")
+customer_country = open("customer countrv.csv", "w", newline="")
+writer = csv.writer(customer_country, delimiter=",")
 
-next(customer_file)
+fieldnames = ["First Name", "Last Name", "Country"]
+writer.writerow(fieldnames)
 
-for record in customer_file:
+for row in reader:
+    first_name = row[1]
+    last_name = row[2]
+    country = row[4]
 
-    print(record)
+    display = [first_name, last_name, country]
+    writer.writerow(display)
 
-    print("first name:", record[1])
-    print("last name:", record[2])
-    print("Country:", record[4])
-
-    input()
-
-customer_file.close()
+customers.close()
+customer_country.close()
